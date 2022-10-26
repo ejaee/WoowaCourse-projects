@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fejaee%2FWoowaCourse-projects&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 # 👨🏻‍💻 우아한 테크 코스 5기 프리코스 진행
 
 _우아한테크코스 프리코스에서 학습한 내용을 정리합니다_
