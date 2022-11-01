@@ -1,16 +1,273 @@
-# ğŸ‘¨ğŸ»â€ğŸ’» ìš°ì•„í•œ í…Œí¬ ì½”ìŠ¤ 5ê¸° í”„ë¦¬ì½”ìŠ¤ ì§„í–‰
+# ???? ****¿ì¾ÆÇÑ Å×Å© ÄÚ½º 5±â ÇÁ¸®ÄÚ½º ÁøÇà****
 
-_ìš°ì•„í•œí…Œí¬ì½”ìŠ¤ì—ì„œ í•™ìŠµí•œ ë‚´ìš©ì„ ì •ë¦¬í•©ë‹ˆë‹¤_
+_¿ì¾ÆÇÑÅ×Å©ÄÚ½º¿¡¼­ ÇĞ½ÀÇÑ ³»¿ëÀ» Á¤¸®ÇÕ´Ï´Ù_
 
 
 
-ê¸°ê°„
+### ****±â°£****
 
 - '22.10.26. ~ '22.11.22.
 
-ì§„í–‰ë¯¸ì…˜
+### ****ÁøÇà¹Ì¼Ç****
 
 |Project|Repository|Pull Request|
 |------|---|---|
-|ìˆ«ì ì•¼êµ¬ê²Œì„|.|.|
+|onboarding|.|.|
 |.|.|.|
+|.|.|.|
+|.|.|.|
+
+
+## ****1ÁÖÂ÷****
+
+? [Problem1](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
+
+### ****±â´É ¿ä±¸»çÇ×****
+
+****±â´É ¸ñ·Ï****
+
+- Ã¥ÀÇ ¿ŞÂÊ ÆäÀÌÁö¿Í ¿À¸¥ÂÊ ÆäÀÌÁö °ª ¹Ş±â
+
+    ?? [¿¹¿ÜÃ³¸®] Ã¥ÀÇ 1ºÎÅÍ 400±îÁöÀÇ ¹üÀ§¸¦ ¹ş¾î³ª´Â °ªÀ» ¹ŞÀº °æ¿ì
+
+    ?? [¿¹¿ÜÃ³¸®] Ã¹ ¹øÂ° ¿ä¼Ò´Â È¦¼ö, µÎ ¹øÂ° ¿ä¼Ò´Â Â¦¼ö°¡ ¾Æ´Ñ °æ¿ì
+
+    ?? [¿¹¿ÜÃ³¸®] µÎ ¿ä¼Ò°¡ ¿¬¼ÓµÈ ÀÚ¿¬¼ö°¡ ¾Æ´Ñ °æ¿ì
+
+    ?? [?¿¹¿ÜÃ³¸®] 1ÀÌ³ª 400À» Æ÷ÇÔÇÏ°í ÀÖ´Â °æ¿ì
+
+    ?? [?¿¹¿ÜÃ³¸®] ¹ŞÀº ÆäÀÌÁö°¡ µÎ ¿ä¼Ò°¡ ¾Æ´Ñ °æ¿ì
+    - ¿¹¿Ü»çÇ× ½Ã return -1
+
+ 
+- ¹ŞÀº ÆäÀÌÁö °ªÀ» È°¿ëÇØ ÃÖ´ë°ª ±¸ÇÏ±â
+  
+    ?? ÇÃ·¹ÀÌ¾î°¡ ¹ŞÀº µÎ ÆäÀÌÁö¸¦ È°¿ëÇØ Á¶°Ç¿¡ ¸Â´Â ÃÖ´ë°ª ±¸ÇÏ±â
+    
+    ?? ÆäÀÌÁö °¢ ÀÚ¸® ¼ıÀÚÀÇ ÇÕ°ú °ö Áß ÃÖ´ë°ª ±¸ÇÏ±â
+
+    ?? ¿ŞÂÊ ÆäÀÌÁö¿Í ¿À¸¥ÂÊ ÆäÀÌÁö Áß ÃÖ´ë°ª ±¸ÇÏ±â
+
+
+- °¢ ÇÃ·¹ÀÌ¾îÀÇ ÃÖ´ë°ªÀ» ºñ±³ÇÏ´Â ±â´É
+
+    ?? °¢ ÇÃ·¹ÀÌ¾îÀÇ ¼ıÀÚ¸¦ ¼­·Î ºñ±³ÇÏ¿© ½ÂºÎ °á°ú¸¦ ¹İÈ¯ÇÏ±â
+    - pobi°¡ ÀÌ±æ ½Ã return 1
+    - crongÀÌ ÀÌ±æ ½Ã return 2
+    - ¹«½ÂºÎ ½Ã return 0
+    - ¿¹¿Ü»çÇ× ½Ã return -1
+
+### ****ÇĞ½À ³»¿ë****
+
+1. `List<integer> pages`
+
+    java¿¡´Â ÄÃ·º¼Ç ÇÁ·¹ÀÓ¿÷ÀÇ ÇÙ½É ÀÎÅÍÆäÀÌ½º°¡ Á¸ÀçÇÑ´Ù
+
+    ```
+    ÄÃ·º¼Ç
+    -> ¿©·¯ °´Ã¼¸¦ ¸ğ¾Æ ³õÀº °Í
+
+    ÇÁ·¹ÀÓ¿÷
+    -> Ç¥ÁØÈ­, Á¤ÇüÈ­µÈ Ã¼°èÀûÀÎ ÇÁ·Î±×·¡¹Ö ¹æ½Ä
+
+    ÄÃ·º¼Ç ÇÁ·¹ÀÓ¿÷
+    -> ÄÃ·º¼Ç(´Ù¼öÀÇ °´Ã¼)¸¦ ´Ù·ç±â À§ÇÑ Ç¥ÁØÈ­µÈ ÇÁ·Î±×·¡¹Ö ¹æ½Ä
+    -> °´Ã¼(µ¥ÀÌÅÍ)¸¦ ´Ù·é´Ù 
+        : ÀúÀå, °Ë»ö, »èÁ¦, Á¤·Ä...
+
+    ÄÃ·º¼Ç Å¬·¡½º
+    -> ´Ù¼öÀÇ µ¥ÀÌÅÍ¸¦ ÀúÀåÇÒ ¼ö ÀÖ´Â Å¬·¡½º
+        :  Arraylist, HashSet, Vector...
+    ```
+
+
+    - List
+    - Set
+    - Map
+
+- List
+
+    ¹è¿­ÀÇ Á¤Àû »ı¼ºÀÇ ÇÑ°è¸¦ ÇØ°áÇÏ±âÀ§ÇØ ¸¸µé¾îÁø Å¬·¡½º·Î,
+
+    ¸Ş¸ğ¸® Çã¿ë ¹üÀ§ ³»¿¡¼­ °Ô¼Ó Ãß°¡ ÇÒ ¼ö ÀÖµµ·Ï ¸¸µç ÀÚ·áÇü Å¬·¡½ºÀÌ´Ù
+
+    ```java
+    List<String> listA = new ArrayList<String>();
+    List<String> listB = new LinkedList<String>();
+    List<String> listC = new Vector<String>();
+    List<String> listD = new Stack<String>();
+    ```
+
+    Æ¯Â¡
+
+    - ¼ø¼­°¡ ÀÖ´Ù
+    - Áßº¹À» Çã¿ëÇÑ´Ù
+    - ¾²ÀÓ : ´ë±âÀÚ ¸í´Ü
+
+- add()
+
+    ListÀÇ °ªÀ» Ãß°¡ÇÏ±â À§ÇÑ ¸Ş¼­µåÀÌ´Ù
+
+    ```java
+    List<String> listA = new ArrayList<String>();
+
+    listA.add("aaa");
+    listA.add("eee");
+    listA.add(new String("ccc"));
+    listA.add(1, "ddd");
+
+    [aaa, ddd, eee, ccc]
+    ```
+
+- get(index)
+
+    °ªÀ» ²¨³»ÁÖ´Â ¸Ş¼­µåÀÌ´Ù
+
+    ¸ğµç µ¥ÀÌÅÍ¸¦ ÀüºÎ °¡Á®¿À°í ½ÍÀ» ¶§´Â Iterator¿Í For¹®À» »ç¿ëÇÑ´Ù
+
+    ```java
+    // index¸¦ ÅëÇÑ Á¶È¸
+    String element0 = ListA.get(0);
+    String element1 = ListA.get(1);
+    String element2 = ListA.get(2);
+
+    // Iterator¸¦ ÅëÇÑ ÀüÃ¼ Á¶È¸
+    Iterator<String> iterator = listA.iterator();
+
+    while (iterator.hasNext()) {
+        String element = itrator.next();
+        sout(element);
+    }
+
+    // for-loop¸¦ ÅëÇÑ ÀüÃ¼ Á¶È¸
+    for (Object obj : ListA) {
+        String element = (String)obj;
+    }
+    ```
+    
+    ¸®½ºÆ® ³»¿¡´Â `°´Ã¼°¡ ÀúÀå`µÈ´Ù
+
+
+
+
+- List`<String>` Á¦³×¸¯(Generics)
+
+    <> ¾È¿¡ ¾î¶² Å¸ÀÔÀ» ¼±¾ğÇØÁÖ¾î ÇØ´ç List°¡ »ç¿ëÇÒ °´Ã¼ÀÇ Å¸ÀÔÀ» ÁöÁ¤ÇØÁØ´Ù´Â ¶æÀÌ´Ù
+
+    ´Ù·ê °´Ã¼ÀÇ Å¸ÀÔÀ» ¹Ì¸® ¸í½ÃÇÏ¹Ç·Î½á °´Ã¼ Ä³½ºÆÃÀÇ ÇÊ¿ä¼ºÀ» ¾ø¾Ø´Ù
+
+    1. Å¸ÀÔÀÇ ¾ÈÀü¼º : ÀÇµµÇÏÁö ¾ÊÀº Å¸ÀÔÀÇ °´Ã¼ÀúÀåÀ» ¸·´Â´Ù
+    2. Ä³½ºÆÃÀ» ÁÙ¿© ÄÚµåÀÇ °£°áÇÔ
+
+<br>
+
+- Á¦³×¸¯ÀÇ ´ÙÇü¼º
+
+    Á¦³×¸¯Àº Å¬·¡½º, ÀÎÅÍÆäÀÌ½º µî ´Ù¾ÓÇÏ°Ô »ç¿ëµÈ´Ù
+    
+    ```java
+    List<Sports> arrList = new ArrayList<Sports>();
+
+    arrList.add(new Sports());
+    arrList.add(new Soccer());
+    arrList.add(new BaseBall());
+
+    class Soccer extends Sports {}
+    class Baseball extends Sports {}
+
+    ÇÏÀ§ Å¬·¡½º °´Ã¼°¡ ºÎ¸ğ Å¬·¡½º Å¸ÀÔÀ¸·Î ¼±¾ğµÈ List¿¡ ÀúÀåµÉ ¼ö ÀÖ´Ù
+
+    Sports sports = arrList.get(0);
+    Soccer soccer = (Soccer)arrList.get(1); // ²¨³¾¶§´Â Ä³½ºÆÃÀÌ ÇÊ¿äÇÏ´Ù
+    ```
+
+- ±âÅ¸ ¸Ş¼­µå
+
+    1. °ªÀÇ ´ë ¼Ò ºñ±³ ¸Ş¼­µå
+
+        ```java
+        Math.max()
+        Math.min()
+        ```
+
+    2. Integer to String
+
+        ```java
+        int num = 10;
+        String str1 = integer.toString(num);
+        String str2 = "" + num;
+        ```
+
+    3. ±æÀÌ¸¦ ±¸ÇÏ´Â ¸Ş¼­µå
+
+        ```java
+        String str1 = "ABCDE";
+
+        str1.length();
+        ```
+
+---
+
+
+? [Problem2](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
+
+### ****±â´É ¿ä±¸»çÇ×****
+
+- String ¾ÏÈ£¹® ¹Ş±â
+  - [¿¹¿ÜÃ³¸®] ¾ÏÈ£¹®ÀÇ ±æÀÌ°¡ 1ÀÌ»ó 1000ÀÌÇÏ°¡ ¾Æ´Ñ °æ¿ì
+  - [¿¹¿ÜÃ³¸®] ¾ÏÈ£¹®ÀÇ ±¸¼º¿ä¼Ò°¡ ¼Ò¹®ÀÚ·Î ÀÌ·ç¾îÁöÁö ¾ÊÀº °æ¿ì
+  
+ 
+- Á¶°Ç¿¡ ¸Â°Ô ÇØµ¶ÇÏ±â
+- 
+  - pobi°¡ ÀÌ±æ ½Ã return 1
+  - crongÀÌ ÀÌ±æ ½Ã return 2
+  - ¹«½ÂºÎ ½Ã return 0
+  - ¿¹¿Ü»çÇ× ½Ã return -1
+
+
+
+****±â´É ¸ñ·Ï****
+
+****ÇĞ½À ³»¿ë****
+
+
+? [Problem3](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
+
+### ****±â´É ¿ä±¸»çÇ×****
+
+****±â´É ¸ñ·Ï****
+
+****ÇĞ½À ³»¿ë****
+
+? [Problem4](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
+
+### ****±â´É ¿ä±¸»çÇ×****
+
+****±â´É ¸ñ·Ï****
+
+****ÇĞ½À ³»¿ë****
+
+? [Problem5](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
+
+### ****±â´É ¿ä±¸»çÇ×****
+
+****±â´É ¸ñ·Ï****
+
+****ÇĞ½À ³»¿ë****
+
+? [Problem6](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
+
+### ****±â´É ¿ä±¸»çÇ×****
+
+****±â´É ¸ñ·Ï****
+
+****ÇĞ½À ³»¿ë****
+
+? [Problem7](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
+
+### ****±â´É ¿ä±¸»çÇ×****
+
+****±â´É ¸ñ·Ï****
+
+****ÇĞ½À ³»¿ë****
