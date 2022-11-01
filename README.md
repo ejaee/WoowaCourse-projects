@@ -20,13 +20,11 @@ _우아한테크코스에서 학습한 내용을 정리합니다_
 
 ## ****1주차****
 
-? [Problem1](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
+### ? [문제1](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
 
-### ****기능 요구사항****
+### ****기능 목록****
 
-****기능 목록****
-
-- 책의 왼쪽 페이지와 오른쪽 페이지 값 받기
+- 플레이어가 받은 두 페이지의 유효성을 확인하는 기능
 
     ?? [예외처리] 책의 1부터 400까지의 범위를 벗어나는 값을 받은 경우
 
@@ -40,7 +38,7 @@ _우아한테크코스에서 학습한 내용을 정리합니다_
     - 예외사항 시 return -1
 
  
-- 받은 페이지 값을 활용해 최대값 구하기
+- 받은 페이지 값을 활용해 최대값을 구하는 기능
   
     ?? 플레이어가 받은 두 페이지를 활용해 조건에 맞는 최대값 구하기
     
@@ -209,65 +207,113 @@ _우아한테크코스에서 학습한 내용을 정리합니다_
 ---
 
 
-? [Problem2](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
+? [문제2](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
 
-### ****기능 요구사항****
+### ****기능 목록****
 
-- String 암호문 받기
-  - [예외처리] 암호문의 길이가 1이상 1000이하가 아닌 경우
-  - [예외처리] 암호문의 구성요소가 소문자로 이루어지지 않은 경우
+
+- 받은 String 암호문이 유효한지 검증하는 기능
+  
+    ?? [예외처리] 암호문의 길이가 1이상 1000이하가 아닌 경우
+
+    ?? [예외처리] 암호문의 구성요소가 소문자로 이루어지지 않은 경우
   
  
-- 조건에 맞게 해독하기
-- 
-  - pobi가 이길 시 return 1
-  - crong이 이길 시 return 2
-  - 무승부 시 return 0
-  - 예외사항 시 return -1
+- 조건에 맞게 해독하는 기능
+  
+    ?? 연속하는 중복 문자들을 범위를 가져오기
+
+    ?? 받아온 범위만큼 문자를 삭제하기
+
+    ?? 연속하는 중복 문자들이 없을때까지 진행하기
+
+- 해독된 문자열을 반환하는 기능
 
 
+### ****학습 내용****
 
-****기능 목록****
 
-****학습 내용****
+1. 예외 발생시키기
 
+    ```java
+    throw new IllegaArgumentException("Error");
+    ```
+
+    인자의 예외사항이 발생한 경우,
+
+    잘못된 인자가 들어왔음을 뜻하는 `IllegaArgumentException`의 메서드에 출력하고자하는 에러메세지를 입력한 후
+
+    `new`를 통해 에러를 생성하고 `throw` 하면
+
+    `런타임에러`를 실행해 프로그램을 종료시킴과 동시에 에러메세지를 출력할 수 있다
+    
+2. String vs StringBuilder
+
+    String은 값을 바꿀 수 없다
+
+    값을 바꾸는 것 같은 행동이 사실은 객체를 게속 생성하는 것이다
+
+    값을 바꿀 수 있는 class가 바로 `StringBuilder`이다
+
+- sb.delete(start, end)
+
+    값을 수정할 때 사용되는 메서드로,
+
+    start<= < end 범위의 값을 삭제한다
+
+- sb.toString()
+
+    StringBuilder을 String으로 캐스팅한다
+
+3. Pattern.matches("^[a-z]*$", str)
+
+    Pattern class의 matches 메서드로,
+
+    문자열의 구성요소를 확인할 수 있다
+
+- `"^[a-z]*$"`
+
+    `^` : 문자열의 시작을 의미한다
+
+    `[a-z]` 유효한 문자들의 리스트를 의미한다
+
+    `*` : 반복을 의미한다
+
+    `$` : 문자열이 끝났음을 의미한다
+
+---
+  
 
 ? [Problem3](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
 
-### ****기능 요구사항****
+### ****기능 목록****
 
-****기능 목록****
 
-****학습 내용****
+###  ****학습 내용****
 
 ? [Problem4](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
 
-### ****기능 요구사항****
+### ****기능 목록****
 
-****기능 목록****
 
-****학습 내용****
+### ****학습 내용****
 
 ? [Problem5](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
 
-### ****기능 요구사항****
+### ****기능 목록****
 
-****기능 목록****
-
-****학습 내용****
+### ****학습 내용****
 
 ? [Problem6](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
 
-### ****기능 요구사항****
+### ****기능 목록****
 
-****기능 목록****
 
-****학습 내용****
+### ****학습 내용****
 
 ? [Problem7](https://github.com/ejaee/java-onboarding/blob/main/docs/PROBLEM1.md)
 
-### ****기능 요구사항****
+### ****기능 목록****
 
-****기능 목록****
 
-****학습 내용****
+### ****학습 내용****
