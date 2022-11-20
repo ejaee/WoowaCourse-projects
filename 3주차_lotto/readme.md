@@ -346,3 +346,452 @@ controller에게 너무 과중한 책임이 있다
 input값을 받아 작동하는 부분과
 
 그렇지 않는 부분을 나눠서 설계를 할수는 없을까
+
+3주차 과제 lotto를 마치고 피드백을 하는 과정에서 많은 아쉬움이 느껴졌다
+
+더 나은 4주차 과제가 되기위해 아쉬운 점을 먼저 고민해보고 과제를 진행하기로 했다.
+
+이전과제 코드리뷰 - 박우빈 님의 코드를 리뷰하며 느낀점을 필두로 작성
+
+```java
+public void run() {
+        try {
+         
+				   LottoPurchaseAmount lottoPurchaseAmount = inputLottoPurchaseAmount();
+
+				}
+private LottoPurchaseAmount inputLottoPurchaseAmount() {
+
+        String lottoPurchaseAmountInput = inputView.inputLottoPurchaseAmount();
+
+        return BasicLottoInputParser.parseLottoPurchaseAmount(lottoPurchaseAmountInput);
+    }
+```
+
+컨트롤러의 run()에서 LottoPurchaseAmount의 값을 받아 가공한 후 
+
+모델에 값을 전달하여 LottoPurchaseAmount 객체를 생성하는 과정을 보자
+
+BasicLottoInputParser은 유틸 패키지에 존재하고 널, 숫자를 확인한다
+
+```java
+public class BasicLottoInputParser {
+
+    private BasicLottoInputParser() {
+    }
+
+    public static LottoPurchaseAmount parseLottoPurchaseAmount(final String input) {
+        return parseWithCheckingEmpty(input, LottoPurchaseAmount::from);
+    }
+		
+		private static <T> T parseWithCheckingEmpty(final String input, final IntFunction<T> creationFunction) {
+        EmptyChecker.check(input);
+
+        return parse(input, creationFunction);
+    }
+
+    private static <T> T parse(final String input, final IntFunction<T> creationFunction) {
+        return Stream.of(input)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(creationFunction::apply)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+}
+```
+
+parseLottoPurchaseAmount(lottoPurchaseAmountInput); 에서 먼저 Empty를 확인한다
+
+```java
+private static <T> T parseWithCheckingEmpty(final String input, final IntFunction<T> creationFunction) {
+```
+
+<T> ? 
+
+제네릭에 대해 먼저 공부해보자
+
+[코딩교육 티씨피스쿨](http://tcpschool.com/java/java_generic_concept)
+
+## 제네릭(generic)
+
+- 설명 보기
+    
+    데이터의 타입을 일반화한다는 것을 의미한다
+    
+    클래스나 메소드에서 사용할 내부 데이터 타입을 컴파일 시에 미리 지정하는 방법이다
+    
+    장점
+    
+    1. 클래스, 메소드 내부에서 사용되는 객체 타입 안정성을 높일 수 있다
+    2. 반환값에 대한 타입 변환 및 타입 검사에 들어가는 노력을 줄일 수 있다
+    
+    제네릭이 없을때는 인수나 반환값으로 Object 타입을 사용했다
+    
+    이럴 경우 반환된 Object 객체를 다시 원하는 타입으로 변환하야한다
+    
+    제네릭을 통해 이와같은 번거로운 작업을 생략할 수 있다
+    
+    ## 제네릭의 생성
+    
+    ```java
+    class MyArray<T> {
+        T element;
+        
+    		void setElement(T element) { 
+    			
+    			this.element = element; 
+    		}
+        
+    		T getElement() {
+    	
+    			return element; 
+    		}
+    }
+    ```
+    
+    위의 T를 타입 변수라고 하며 임의의 참조현 타입을 의미한다
+    
+    어떤 문자를 사용해도 상관 없음은 물론, 쉼표로 구분하여 여러개의 타입 변수를 명시할 수 있다
+    
+    실제로 선언할 때에는 사용할 실제 타입을 명시해야한다
+    
+    ```java
+    MyArray<Integer> myArr = new MyArray<Integer>();
+    
+    // 추정 가능할 때에는 생략이 가능
+    MyArray<Integer> myArr = new MyArray<>(); // Java SE 7부터 가능함.
+    ```
+    
+    자바 코드에서 선언되고 사용된 제네릭 타입은 컴파일 되면 자동으로 검사되어 타입 변환된다
+    
+    모든 제네릭 타입은 제거되는데, 제네릭을 사용하지 않는 코드와의 호환성 유지를 위해서이다
+    
+    ## 제네릭 타입 변수의 제한
+    
+    extends 키워드를 사용하면 타입 변수에 특정 타입만을 사용하도록 제한할 수 있다
+    
+    ```java
+    class AnimalList<T extends LandAnimal> { ... }
+    ```
+    
+    ## 제네릭 메소드
+    
+    메소드의 선언부에 타입 변수를 사용한 메소드를 의미한다
+    
+    ```java
+    public static <T> void sort( ... ) { ... }
+    ```
+    
+    ## 와일드카드의 사용
+    
+    와일드 카드란 이름에 제한을 두지 않음을 표현하는 데 사용하는 기호를 의미한다
+    
+    자바의 제네릭에서는 물음표(?) 기호를 사용ㅇ하여 이러한 와일드 카드를 사용할 수 있다
+    
+    ```java
+    <?>           // 타입 변수에 모든 타입을 사용할 수 있음.
+    <? extends T> // T 타입과 T 타입을 상속받는 자손 클래스 타입만을 사용할 수 있음.
+    <? super T>   // T 타입과 T 타입이 상속받은 조상 클래스 타입만을 사용할 수 있음.
+    ```
+    
+
+위에서 언급한 <T>는 제네릭 메서드를 의미하는 것  이었다
+
+컴파일러에게 “T라는 클래스가 매개변수가 오면 Optional의 유형도 T야” 라고 알려주는 것
+
+```java
+private static <T> T parse(final String input, final IntFunction<T> creationFunction) {
+        return Stream.of(input)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(creationFunction::apply)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+```
+
+(IntFunction<T> creationFunction) 은 무엇일까
+
+[Java Lambda (2) 타입 추론과 함수형 인터페이스](https://futurecreator.github.io/2018/07/20/java-lambda-type-inference-functional-interface/)
+
+## 기본형 함수형 인터페이스
+
+- 설명 보기
+    
+    자바는 람다를 지원하기 우해서 타입 추론을 강화해야 했다
+    
+    이로인해 함수형 인터페이스가 등장한다
+    
+    함수형 인터페이스는 하나의 추상메소드로 이루어진 인터페이스를 말하는데
+    
+    함수의 시그니쳐가 정의되어 있기 때문에 컴파일러가 이 정보를 참고해 람다에서 생략된 정보들을 추론할 수 있다
+    
+    함수형 인터페이스는 단 하나의 메소드를 가질 수 있다
+    
+    ****@FunctionalInterface**** 로 표시가 가능하다
+    
+    ```java
+    // 컴파일 OK
+    public interface FunctionalInterfaceExample {
+        
+    }
+    
+    // 추상 메소드가 없으므로 컴파일 에러
+    @FunctionalInterface
+    public interface FunctionalInterfaceExample {
+        
+    }
+    
+    // 추상 메소드가 두 개 이상이면 컴파일 에러
+    @FunctionalInterface
+    public interface FunctionalInterfaceExample {
+      void apply();
+      void illigal(); // error
+    }
+    ```
+    
+
+함수형 인터페이스를 사용하는 이유는 다음과 같다
+
+```java
+		public static LottoPurchaseAmount parseLottoPurchaseAmount(final String input) {
+        return parseWithCheckingEmpty(input, LottoPurchaseAmount::from);
+    }
+
+    public static SizeOfManualLotto parseSizeOfManualLotto(final String input) {
+        return parseWithCheckingEmpty(input, SizeOfManualLotto::from);
+    }
+
+    public static LottoNumber parseLottoBonusBall(final String input) {
+        return parseWithCheckingEmpty(input, LottoNumberPool::get);
+    }
+
+    private static <T> T parseWithCheckingEmpty(final String input, final IntFunction<T> creationFunction) {
+        EmptyChecker.check(input);
+
+        return parse(input, creationFunction);
+    }
+		private static <T> T parse(final String input, final IntFunction<T> creationFunction) {
+        return Stream.of(input)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(creationFunction::apply)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+}
+```
+
+문제에서 여러개의 인자를 받는데 그 중, 구매량, 수동로또의 사이즈, 로또번호는 숫자만을 받는다는 공통점이 있다.
+
+이러한 점을 고려해 동일하게 parse 메서드를 사용할 수 있도록 구현했다
+
+서로 같은 유효성 검사를 하지만 결과적으로 우리는 객체를 생성해야 하는데 그 객체가 서로 다르므로 생성자를 intfunction에 담는다
+
+parse의 .map(creationFunction::apply)에서 객체를 생성하게되고 .findFirst()로 객체를 전달한다
+
+이때 람다식을 사용하고 있다
+
+## 람다
+
+[Java Lambda (1) 기본](https://futurecreator.github.io/2018/07/19/java-lambda-basics/)
+
+[자바의 정석 - 람다식(Lambda Expression)](https://ryan-han.com/post/java/java-lambda/)
+
+- 설명 보기
+    
+    람다는 메서드를 하나의 식으로 표현한 것을 말한다
+    
+    메서드를 람다식으로 표현하면 메서드의 이름과 반환값이 없어지므로 람다식을 익명 함수라고도 한다
+    
+    람다식은 메서드의 매개변수로 전달될 수 있고,
+    
+    메서드의 결과로 반환될 수 있다
+    
+    즉, 메서드를 변수처럼 다루는 것이 가능하다
+    
+    익명 클래스와 헷갈릴 수 있는데, 익명 클래스는 인스턴스를 생성해야 하지만, 함수는 평가될 때마다 새로 생성되지 않는다
+    
+    함수를 위한 메모리 할당은 자바 힙의 permanent 영역에 한번 저장된다
+    
+    객체는 데이터와 밀접하게 연관해서 동작하지만, 함수는 데이터와 분리되어있다
+    
+    상태를 보존하지 않기 때문에 연산을 여러 번 적용해도 결과가 달라진다
+    
+    ## 람다식 작성하기
+    
+    메서드에서 이름과 반환타입을 제거한다
+    
+    매개변수 선언부와 몸통 사이에 → 를 추가한다
+    
+    ```java
+    //기존
+    반환타입 메서드이름 (매개변수 선언)  {
+      ...
+    }
+    
+    //람다식
+    (매개변수 선언) ->  {
+      ...
+    }
+    ```
+    
+    반환값이 있는 메서드는 return 대신 식으로 대신할 수 있다
+    
+    (연산 결과가 자동으로 반환값이 되고 ;를 생각)
+    
+    매개변수의 타입은 추론가능하면 생략이 가능하다
+    
+    두 매개변수 중 하나만 생략하는 것은 불가능하다
+    
+    매개변수가 하나뿐이면 괄호() 생략이 가능하다
+    
+    ```java
+    //기존
+    int max(int a, int b) {
+      return a > b ? a : b;
+    }
+    
+    //람다식
+    (int a, int b) -> {
+      return a > b ? a : b;
+    }
+    
+    //return문 대신 expression 사용
+    (int a, int b) -> a > b ? a: b
+    
+    //매개변수 타입 생략
+    (a, b) -> a > b ? a : b
+    
+    //매개변수 1개일 경우 괄호 생략
+    a -> a*a     //OK
+    int a -> a*a //에러
+    
+    //본문 문장 1개일 경우 중괄호 생략
+    (String name, int i) -> System.out.println(name+"="+i)
+    ```
+    
+    ## 함수형 인터페이스
+    
+    람다식을 다루기 위한 인터페이스를 말한다
+    
+    람다식은 메서드와 동등한 것이 아니라 익명클래스의 객체와 동등하다
+    
+    ```java
+    // 람다식
+      (int a, int b) -> a > b ? a : b
+    
+    // 익명클래스의 객체
+      new Object()  {
+        int max(int a, int b) {
+          return a > b ? a : b ;
+        }
+      }
+    ```
+    
+    람다식으로 정의된 익명 객체의 메서드를 호출하려면 참조 변수가 필요하다
+    
+    이때, 참조 변수의 타입은 클래스 또는 인터페이스가 가능한데 람다식과 동등한 메서드가 정의되어 있는 것이어야 한다
+    
+    예를 들어
+    
+    ```java
+    // 예를 들어 max() 메서드가 정의된 Myfunction 인터페이스 정의
+      interface MyFunction  {
+        public abstract int max(int a, int b);
+    
+    // MyFunction 인터페이스를 구현한 익명클래스 객체 생성
+      MyFunction f = new MyFunction() {
+        public int max (int a, int b);
+          return a > b ? a : b;
+        }
+      }
+      int big = f.max(5, 3);  //익명 객체의 메서드 호출
+    
+    // 위의 익명 객체를 람다식으로 대체
+      MyFunction f = (int a, int b) -> a > b ? a : b;
+      int big = f.max(5, 3);
+    ```
+    
+    MyFunction 인터페이스를 구현한 익명 객체를 람다식으로 대체 가능한 이유는 
+    
+    람다식도 실제로는 익명 객체이고 
+    
+    MyFunction 인터페이스를 구현한 익명 객체의 메서드 max()와 람다식의 매개변수의 타입과 개수, 반환값이 일치하기 때문이다.
+    
+    단 함수형 인터페이스에는 오직 하나의 초상 메서드만 정의되어있다.
+    
+    @FunctionalInterface 를 붙이면 컴파일러가 함수형 인터페이스를 올바르게 정의하였는지 확인해준다
+    
+    ```java
+    // 기존 인터페이스의 메서드 구현
+      List<String> list = Arrays.asList("abc", "aaa", "bbb", "ccc");
+      Collections.sort(list, new Comparator<String>() {
+        public int compare(String s1, String s2)  {
+          return s2.compareTo(s1);
+        }
+      });
+    
+    // 람다식으로 구현
+      List<String> list = Arrays.asList("abc", "aaa", "bbb", "ccc");
+      Collections.sort(list, (s1, s2) -> s2.compareTo(s1));
+    ```
+    
+    ## ****java.util.function 패키지****
+    
+    - 수학에서 결과로 true 또는 false를 반환하는 함수를 Predicate 라고 한다.
+    - 매개변수가 2개인 함수형 인터페이스는 이름 앞에 ‘Bi’가 붙는다.
+    - Supplier는 매개변수는 없고 반환값만 존재하는데 메서드는 두 개의 값을 반환할 수 없으므로 BiSupplier가 없다.
+    - 매개변수의 타입과 반환타입이 일치할 때는 Function 대신 UnaryOperator를 사용한다. (매개 변수 2개면 BinaryOperator)
+    
+    문법 요약
+    
+    ```java
+    // 인자 -> 바디
+    (int x, int y) -> { return x + y; }
+    
+    // 인자 타입 생략 - 컴파일러가 추론
+    (x, y) -> { return x + y; }
+    
+    // return 및 중괄호 생략
+    (x, y) -> x + y
+    
+    // 인자가 하나인 경우 인자 괄호 생략
+    x-> x * 2
+        
+    // 인자가 없으면 빈 괄호로 표시
+    () -> System.out.println("Hey there!")
+    
+    // 메소드 참조 Method reference
+    // (value -> System.out.println(value)) 의 축약형
+    System.out::println
+    ```
+    
+    ## 메서드 참조
+    
+    람다식이 하나의 메서드만 호출하는 경우 메서드 참조를 통해 람다식을 간략히 할 수 있다
+    
+    클래스명 :: 메서드명 또는 참조변수 :: 메서드명
+    
+    ```java
+    // 기존
+    Function<String, Integer> f = (String s) -> Integer.parseInt(s);
+    
+    // 메서드 참조
+    Funcation<String, Integer> f = Integer::parseInt;
+    ```
+    
+    생성자를 호출하는 람다식도 메서드 참조로 변환이 가능하다
+    
+    ```java
+    Supplier<MyClass> s = () -> new MyClass();  // 람다식
+    Supplier<MyClass> s = MyClass::new; // 메서드 참조
+    ```
+    
+    배열을 생성할 경우
+    
+    ```java
+    Function<Integer, int[]> f = x -> new int[x]; // 람다식
+    Function<Integer, int[]> f2 = int[]::new; // 메서드 참조
+    ```
