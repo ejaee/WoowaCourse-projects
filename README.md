@@ -2,7 +2,7 @@
 
 _우아한테크코스에서 학습한 내용을 정리합니다_
 
-![Alt text](./1.png){: width="100" height="100"}
+<center><img src="/1.png" width="500" height="500"></center>
 
 ### ****기간****
 
